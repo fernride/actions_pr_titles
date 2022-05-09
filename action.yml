@@ -1,11 +1,6 @@
 name: "Talos Pull Request Title"
 description: "Beautify the PR Title"
 
-inputs:
-  repo-token:
-    description: "Repo Token"
-    required: true
-
 runs:
   using: "composite"
   steps:
@@ -13,7 +8,7 @@ runs:
       run: |
         ${{ github.action_path }}/action.sh
       env:
-        REPO_TOKEN: ${{ inputs.repo-token }}
+        REPO_TOKEN: ${{ github.token }}
         REPO_NAME: ${{ github.repository }}
         PR_NUMBER: ${{ github.event.number }}
       shell: bash
