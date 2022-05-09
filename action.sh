@@ -8,7 +8,7 @@
 title=$(curl -H "Accept: application/vnd.github.v3+json" --header "Authorization: Bearer ${REPO_TOKEN}" https://api.github.com/repos/${REPO_NAME}/pulls/${PR_NUMBER} | grep -Po '"title":.*?[^\\]",')
 title_orig="${title}"
 
-# check if title contains Jira ID already
+# check if title contains Jira ID already, otherwise use branch name (Github often uses a commit message for the PR title)
 if ! grep -o -E "[a-zA-Z0-9,\.\_\-]+-[0-9]+" <<< "${title}"; then
     echo "Current automatic PR title does not contain Jira Ticket ID, using branch name '${BRANCH_NAME}' instead!"
     title="${BRANCH_NAME}"
