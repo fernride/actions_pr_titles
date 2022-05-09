@@ -5,10 +5,10 @@ runs:
   using: "composite"
   steps:
     - name: Call Action.
-      run: |
-        ${{ github.action_path }}/action.sh
+      run: ${{ github.action_path }}/action.sh
       env:
         REPO_TOKEN: ${{ github.token }}
         REPO_NAME: ${{ github.repository }}
         PR_NUMBER: ${{ github.event.number }}
+        BRANCH_NAME: ${{ github.head_ref || github.ref_name }} # head ref is only set for PRs, fall back to ref_name otherwise
       shell: bash
