@@ -1,10 +1,16 @@
 name: "Talos Pull Request Title"
-description: "Beautify the PR Title"
+description: "Beautify the PR title"
+
+outputs:
+  jira_id:
+    description: "Jira ID found in PR title or branch name."
+    value: ${{ steps.update-title.outputs.jira_id }}
 
 runs:
   using: "composite"
   steps:
-    - name: Call Action.
+    - name: Update title
+      id: update-title
       run: ${{ github.action_path }}/action.sh
       env:
         REPO_TOKEN: ${{ github.token }}
