@@ -18,7 +18,7 @@ title=$(sed "s/.*title\": \"\(.*\)\",/\1/g" <<<"${title}")
 title=$(sed "s/\(fs\|FS\|Fs\|fS\)[ -]*\([0-9]*\)/FS-\2/g" <<<"${title}")
 
 # get JIRA id from title and set as output for next step
-jira_id=$(grep -o -E "[A-Z0-9]+-[0-9]+")
+jira_id=$(grep -o -E "[A-Z0-9]+-[0-9]+" <<<"${title}")
 echo ::set-output name=jira_id::"${jira_id}"
 echo "Jira id is '${jira_id}'."
 
