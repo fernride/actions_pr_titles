@@ -6,7 +6,7 @@
 # "Fs 2345,fs 234" becomes "FS-2345,FS-234"
 # etc.
 title=$(curl -H "Accept: application/vnd.github.v3+json" --header "Authorization: Bearer ${REPO_TOKEN}" https://api.github.com/repos/${REPO_NAME}/pulls/${PR_NUMBER} | grep -Po '"title":.*?[^\\]",')
-title_orig="${title}"
+title_orig=${title}
 
 # check if title contains Jira ID already, otherwise use branch name (Github often uses a commit message for the PR title)
 if ! grep -o -E "[a-zA-Z0-9,\.\_\-]+-[0-9]+" <<<"${title}"; then
